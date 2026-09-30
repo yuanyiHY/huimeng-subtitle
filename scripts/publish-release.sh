@@ -50,6 +50,7 @@ json.dump({
 }, sys.stdout, ensure_ascii=False, indent=2)
 PY
 cat dist/latest.json
+echo
 
 # ---------------------------------------------------------------- 2. 推送
 say "推送代码与 tag 到 ${REPO}"
