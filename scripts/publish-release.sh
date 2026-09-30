@@ -91,11 +91,16 @@ upload() {
   local file="$1" mime="$2"
   say "上传 $(basename "$file")（$(du -h "$file" | awk '{print $1}')）"
   local code
+  # 资产名可能是中文（如 绘梦subtitle-v3.3.1.dmg），放进 query string 前必须做
+  # 百分号编码；否则 GitHub 直接返回 400 Bad Request
+  local name enc
+  name="$(basename "$file")"
+  enc="$(python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))' "$name")"
   code="$(curl -sS -o /tmp/gh_upload.json -w '%{http_code}' -X POST \
     -H "Authorization: token ${TOKEN}" \
     -H "Content-Type: ${mime}" \
     --data-binary @"$file" \
-    "${UPLOAD}/releases/${RELEASE_ID}/assets?name=$(basename "$file")")"
+    "${UPLOAD}/releases/${RELEASE_ID}/assets?name=${enc}")"
   if [ "$code" = "201" ] || [ "$code" = "200" ]; then
     say "  上传成功"
   elif [ "$code" = "422" ]; then
