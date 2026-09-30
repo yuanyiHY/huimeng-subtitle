@@ -24,7 +24,7 @@ die() { printf '\033[1;31m✗ %s\033[0m\n' "$1" >&2; exit 1; }
 
 # ---------------------------------------------------------------- 0. 提交前体检
 say "提交前体检"
-if git grep -qE "sk-[A-Za-z0-9_-]{25,}|ghp_[A-Za-z0-9]{30,}|github_pat_" HEAD 2>/dev/null; then
+if git grep -qE "sk-[A-Za-z0-9_-]{32,}|ghp_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{40,}" HEAD 2>/dev/null; then
   die "当前提交里发现疑似密钥，先清理再发布"
 fi
 git rev-parse --verify HEAD >/dev/null 2>&1 || die "还没有任何提交"

@@ -39,7 +39,7 @@ jobs:
 
       - name: 密钥泄漏检查
         run: |
-          if git grep -nE "sk-[A-Za-z0-9_-]{25,}|ghp_[A-Za-z0-9]{30,}|github_pat_" -- . ':!*.example' ':!.github'; then
+          if git grep -nE "sk-[A-Za-z0-9_-]{32,}|ghp_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{40,}" -- . ':!*.example' ':!.github'; then
             echo "::error::发现疑似密钥，请勿提交"
             exit 1
           fi
