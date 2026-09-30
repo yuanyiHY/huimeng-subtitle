@@ -102,10 +102,29 @@ upload() {
     -H "Content-Type: ${mime}" \
     --data-binary @"$file" \
     "${UPLOAD}/releases/${RELEASE_ID}/assets?name=${enc}")"
+  if [ "$code" = "422" ]; then
+    # 同名资产已存在：必须删掉再传，否则 latest.json 会停留在旧内容，
+    # 应用读到的下载地址就会指向已经改名的旧资产（实测踩过）
+    echo "  （同名资产已存在，先删除再重传）"
+    old_id="$(python3 - "$API" "$TOKEN" "$RELEASE_ID" "$asset" <<'PYEOF'
+import json, sys, urllib.request
+api, token, rid, name = sys.argv[1:5]
+req = urllib.request.Request(f"{api}/releases/{rid}/assets?per_page=100",
+                             headers={"Authorization": f"token {token}"})
+with urllib.request.urlopen(req, timeout=30) as r:
+    for a in json.loads(r.read().decode()):
+        if a["name"] == name:
+            print(a["id"]); break
+PYEOF
+)"
+    [ -n "$old_id" ] && curl -sS -o /dev/null -X DELETE \
+      -H "Authorization: token ${TOKEN}" "${API}/releases/assets/${old_id}"
+    code="$(curl -sS -o /tmp/gh_upload.json -w '%{http_code}' -X POST \
+      -H "Authorization: token ${TOKEN}" -H "Content-Type: ${mime}" \
+      --data-binary @"$file" "${UPLOAD}/releases/${RELEASE_ID}/assets?name=${enc}")"
+  fi
   if [ "$code" = "201" ] || [ "$code" = "200" ]; then
     say "  上传成功"
-  elif [ "$code" = "422" ]; then
-    echo "  （同名资产已存在，跳过）"
   else
     die "上传失败：HTTP $code $(head -c 200 /tmp/gh_upload.json)"
   fi
