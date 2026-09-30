@@ -248,10 +248,10 @@ def _write_installer(target: Path, source: str, mount: str, dmg: Path) -> Path:
 # 由绘梦subtitle 生成的更新脚本：等旧进程退出 → 替换 App → 卸载镜像 → 重新打开
 set -u
 PID={os.getpid()}
-TARGET={json.dumps(str(target))}
-SOURCE={json.dumps(source)}
-MOUNT={json.dumps(mount)}
-DMG={json.dumps(str(dmg))}
+TARGET={json.dumps(str(target), ensure_ascii=False)}
+SOURCE={json.dumps(source, ensure_ascii=False)}
+MOUNT={json.dumps(mount, ensure_ascii=False)}
+DMG={json.dumps(str(dmg), ensure_ascii=False)}
 LOG="$HOME/Library/Logs/绘梦subtitle-update.log"
 exec >> "$LOG" 2>&1
 echo "===== $(date '+%F %T') 开始安装 ====="

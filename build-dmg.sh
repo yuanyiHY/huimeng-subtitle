@@ -196,6 +196,14 @@ echo "$SELF_TEST" | grep -q "IMPORTS_OK" || die "自检失败，依赖导入不�
 echo "$SELF_TEST" | head -1 | grep -q "$BUNDLE" || die "自检失败：标准库仍指向包外（$(echo "$SELF_TEST" | head -1)）"
 ok "运行时路径正确，依赖导入通过"
 
+# 包里有两份 VERSION：Resources/VERSION（给人看）与 Resources/app/VERSION（后端读，
+# 决定"检查更新"里的当前版本）。两者不一致会导致装完新版仍上报旧版本、反复提示更新。
+APP_VERSION_FILE="$BUNDLE/Contents/Resources/app/VERSION"
+[ -f "$APP_VERSION_FILE" ] || die "自检失败：缺少 Resources/app/VERSION"
+APP_VER="$(tr -d '[:space:]' < "$APP_VERSION_FILE")"
+[ "$APP_VER" = "$VERSION" ] || die "自检失败：版本号不一致（外层 ${VERSION}，后端读到 ${APP_VER}）"
+ok "版本号一致（${VERSION}）"
+
 # ---------------------------------------------------------------- 7. 签名
 say "ad-hoc 签名"
 codesign --force --deep -s - "$BUNDLE" >/dev/null 2>&1 || die "签名失败"
