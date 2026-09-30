@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -84,6 +85,38 @@ def _feed_url(request: Request) -> str:
     return str(s.get("update", "feed_url") or "").strip()
 
 
+def _macos_system_proxies() -> dict[str, str]:
+    """读 macOS 系统代理设置（设置 → 网络 → 代理）。
+
+    Python 的 urllib 只认 HTTPS_PROXY 这类环境变量，读不到系统代理 ——
+    而国内用户访问 GitHub 基本都要靠代理，不处理的话应用内「检查更新」
+    在开着代理的机器上照样失败。
+    """
+    if sys.platform != "darwin":
+        return {}
+    try:
+        out = subprocess.run(["scutil", "--proxy"], capture_output=True,
+                             text=True, timeout=5).stdout
+    except Exception:  # noqa: BLE001
+        return {}
+    prox: dict[str, str] = {}
+    for scheme, flag, host, port in (("http", "HTTPEnable", "HTTPProxy", "HTTPPort"),
+                                     ("https", "HTTPSEnable", "HTTPSProxy", "HTTPSPort")):
+        if not re.search(rf"{flag}\s*:\s*1\b", out):
+            continue
+        mh = re.search(rf"{host}\s*:\s*(\S+)", out)
+        mp = re.search(rf"{port}\s*:\s*(\d+)", out)
+        if mh and mp:
+            prox[scheme] = f"http://{mh.group(1)}:{mp.group(1)}"
+    return prox
+
+
+def _opener() -> urllib.request.OpenerDirector:
+    """能走代理的 opener：环境变量优先，其次 macOS 系统代理。"""
+    proxies = urllib.request.getproxies() or _macos_system_proxies()
+    return urllib.request.build_opener(urllib.request.ProxyHandler(proxies or {}))
+
+
 def _cache_dir() -> Path:
     d = Path.home() / "Library" / "Caches" / APP_NAME
     d.mkdir(parents=True, exist_ok=True)
@@ -132,7 +165,7 @@ async def check_update(request: Request):
     for attempt in range(2):
         try:
             req = urllib.request.Request(feed, headers={"User-Agent": f"huimeng/{local}"})
-            with urllib.request.urlopen(req, timeout=12) as resp:
+            with _opener().open(req, timeout=12) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
             break
         except Exception as exc:  # noqa: BLE001
@@ -171,7 +204,7 @@ def _download_worker(url: str, version: str, dest: Path) -> None:
     tmp = dest.with_suffix(dest.suffix + ".part")
     try:
         req = urllib.request.Request(url, headers={"User-Agent": f"huimeng/{_local_version()}"})
-        with urllib.request.urlopen(req, timeout=60) as resp, open(tmp, "wb") as fh:
+        with _opener().open(req, timeout=60) as resp, open(tmp, "wb") as fh:
             total = int(resp.headers.get("Content-Length") or 0)
             received = 0
             started = time.time()
