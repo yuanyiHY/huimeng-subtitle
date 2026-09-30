@@ -66,7 +66,26 @@ text = ("# 打包版配置：翻译固定走云端。\n"
         "# 首次使用请在「设置 → 模型设置」里填入你自己的 API Key。\n") + text
 io.open(path, "w", encoding="utf-8").write(text)
 PY
-ok "config.yaml: mt.engine -> cloud"
+# 更新源：优先取环境变量 UPDATE_FEED_URL，其次取仓库根的 update-feed.txt。
+# 有了它，用户装完就能在「设置 → 关于／更新」里直接检查更新，无需手工配置。
+FEED_URL="${UPDATE_FEED_URL:-}"
+if [ -z "$FEED_URL" ] && [ -f "$PROJECT_ROOT/update-feed.txt" ]; then
+  FEED_URL="$(tr -d '[:space:]' < "$PROJECT_ROOT/update-feed.txt")"
+fi
+if [ -n "$FEED_URL" ]; then
+  python3 - "$APP_DIR/config.yaml" "$FEED_URL" <<'PYEOF'
+import io, re, sys
+path, feed = sys.argv[1], sys.argv[2]
+text = io.open(path, encoding="utf-8").read()
+text = re.sub(r'^(\s*feed_url:\s*).*$', lambda m: m.group(1) + '"' + feed + '"',
+              text, count=1, flags=re.M)
+io.open(path, "w", encoding="utf-8").write(text)
+PYEOF
+  ok "config.yaml: mt.engine -> cloud, 更新源已内置"
+  echo "     $FEED_URL"
+else
+  ok "config.yaml: mt.engine -> cloud（未指定更新源，应用内会提示未配置）"
+fi
 
 # ---------------------------------------------------------------- 3. Python 运行时 + 依赖
 say "复制 Python 运行时"

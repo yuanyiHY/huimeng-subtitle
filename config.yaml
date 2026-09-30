@@ -43,4 +43,4 @@ recordings_dir: ~/Documents/intrealtimetranslate-recordings
 # feed_url 指向一个 JSON：{"version":"1.2.1","download_url":"https://…","notes":"…"}
 # 留空则不检查；配置后可兼容托管在任意静态服务器上的更新清单。
 update:
-  feed_url: ""
+  feed_url: "https://github.com/yuanyiHY/huimeng-subtitle/releases/latest/download/latest.json"
