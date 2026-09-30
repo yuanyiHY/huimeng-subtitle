@@ -1,0 +1,54 @@
+name: 基础检查
+
+# 说明：本项目依赖 Apple MLX 与 macOS 原生组件，无法在 CI 里跑完整功能，
+# 因此这里只做"能不能编译 / 有没有语法错误"这类低成本、高收益的检查，
+# 避免把明显坏掉的东西推上去。
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Python 语法编译
+        run: python -m compileall -q backend run.py
+
+      - name: Shell 脚本语法
+        run: |
+          for f in build-dmg.sh scripts/*.sh; do
+            [ -f "$f" ] || continue
+            bash -n "$f" && echo "  ✓ $f"
+          done
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 前端 JS 语法
+        run: |
+          node --check frontend/app.js && echo "  ✓ frontend/app.js"
+
+      - name: 密钥泄漏检查
+        run: |
+          if git grep -nE "sk-[A-Za-z0-9_-]{25,}|ghp_[A-Za-z0-9]{30,}|github_pat_" -- . ':!*.example' ':!.github'; then
+            echo "::error::发现疑似密钥，请勿提交"
+            exit 1
+          fi
+          echo "  ✓ 未发现明文密钥"
+
+      - name: 禁止提交 .env / 构建产物
+        run: |
+          if git ls-files | grep -E "^\.env$|^dist/|\.dmg$"; then
+            echo "::error::这些文件不应入库"
+            exit 1
+          fi
+          echo "  ✓ 未误提交敏感或大体积文件"

@@ -111,6 +111,17 @@ JSON 格式：
 }
 ```
 
+**国内网络提示**：`raw.githubusercontent.com` 在国内经常无法解析，
+所以更新源不要放在 raw 域名上，用 Release 的固定地址即可：
+
+```
+https://github.com/<用户名>/<仓库>/releases/latest/download/latest.json
+```
+
+如果连 `github.com` 也不稳定（会给朋友分发时常见），可以把这两个文件
+（`latest.json` 与 DMG）放到**任意静态托管**上——阿里云 OSS、腾讯云 COS、
+又或者自己的服务器都行，然后把 `feed_url` 改成对应地址即可，程序不关心托管在哪。
+
 ---
 
 ## 技术架构
