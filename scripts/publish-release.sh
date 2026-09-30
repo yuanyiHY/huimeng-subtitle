@@ -23,8 +23,8 @@ VERSION="$(tr -d '[:space:]' < VERSION)"
 TAG="v${VERSION}"
 DMG="dist/绘梦subtitle-v${VERSION}.dmg"
 NAME="$(basename "$DMG")"
-API="https://api.github.com/repos/${REPO}"
-UPLOAD="https://uploads.github.com/repos/${REPO}"
+API="${GITHUB_API_BASE:-https://api.github.com}/repos/${REPO}"
+UPLOAD="${GITHUB_UPLOAD_BASE:-https://uploads.github.com}/repos/${REPO}"
 
 say() { printf '\033[1;36m▸ %s\033[0m\n' "$1"; }
 die() { printf '\033[1;31m✗ %s\033[0m\n' "$1" >&2; exit 1; }
@@ -54,7 +54,7 @@ cat dist/latest.json
 # ---------------------------------------------------------------- 2. 推送
 say "推送代码与 tag 到 ${REPO}"
 git tag -a "$TAG" -m "v${VERSION}" 2>/dev/null || echo "  （tag $TAG 已存在，跳过）"
-git push "https://x-access-token:${TOKEN}@github.com/${REPO}.git" HEAD --tags
+git push "${GITHUB_PUSH_URL:-https://x-access-token:${TOKEN}@github.com/${REPO}.git}" HEAD --tags
 
 # ---------------------------------------------------------------- 3. 建 Release
 say "创建 GitHub Release ${TAG}"

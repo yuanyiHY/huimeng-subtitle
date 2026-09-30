@@ -17,6 +17,9 @@ OWNER="${1:?用法: GITHUB_TOKEN=xxx $0 <owner> [repo]}"
 REPO="${2:-huimeng-subtitle}"
 TOKEN="${GITHUB_TOKEN:?请通过环境变量提供 GITHUB_TOKEN}"
 
+API_BASE="${GITHUB_API_BASE:-https://api.github.com}"
+PUSH_URL="${GITHUB_PUSH_URL:-}"
+
 cd "$(dirname "$0")/.."
 
 say() { printf '\033[1;36m▸ %s\033[0m\n' "$1"; }
@@ -36,7 +39,7 @@ say "创建仓库 ${OWNER}/${REPO}"
 CODE="$(curl -sS -o /tmp/gh_newrepo.json -w '%{http_code}' -X POST \
   -H "Authorization: token ${TOKEN}" \
   -H "Accept: application/vnd.github+json" \
-  https://api.github.com/user/repos \
+  "${API_BASE}/user/repos" \
   -d "{\"name\":\"${REPO}\",\"description\":\"绘梦subtitle —— macOS 实时语音翻译与智能整理\",\"private\":false,\"has_issues\":true,\"has_wiki\":false}")"
 case "$CODE" in
   201) echo "  ✓ 仓库已创建"
@@ -47,11 +50,12 @@ esac
 
 # ---------------------------------------------------------------- 2. 推送
 say "推送代码"
+# token 只出现在这一次性的 URL 里，不写进 git 配置
+[ -n "$PUSH_URL" ] || PUSH_URL="https://x-access-token:${TOKEN}@github.com/${OWNER}/${REPO}.git"
+git push "$PUSH_URL" HEAD 2>&1 | tail -3
 git remote remove origin 2>/dev/null || true
-git remote add origin "https://x-access-token:${TOKEN}@github.com/${OWNER}/${REPO}.git"
-git push -u origin HEAD 2>&1 | tail -3
-git remote set-url origin "https://github.com/${OWNER}/${REPO}.git"   # 别把 token 留在配置里
-echo "  ✓ 已推送，远端已改回不带 token 的地址"
+git remote add origin "https://github.com/${OWNER}/${REPO}.git"
+echo "  ✓ 已推送（git 配置里只留不带 token 的地址）"
 
 echo
 say "完成"
