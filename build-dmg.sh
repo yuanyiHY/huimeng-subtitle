@@ -84,7 +84,13 @@ PYEOF
   ok "config.yaml: mt.engine -> cloud, 更新源已内置"
   echo "     $FEED_URL"
 else
-  ok "config.yaml: mt.engine -> cloud（未指定更新源，应用内会提示未配置）"
+  BUILT_FEED="$(grep -m1 'feed_url:' "$APP_DIR/config.yaml" | sed 's/.*feed_url: *//')"
+  if [ "$BUILT_FEED" = '""' ]; then
+    ok "config.yaml: mt.engine -> cloud（更新源为空，应用内会提示未配置）"
+  else
+    ok "config.yaml: mt.engine -> cloud, 更新源沿用仓库配置"
+    echo "     $BUILT_FEED"
+  fi
 fi
 
 # ---------------------------------------------------------------- 3. Python 运行时 + 依赖
