@@ -96,7 +96,9 @@ upload() {
   # 资产名可能是中文（如 绘梦subtitle-v3.3.1.dmg），放进 query string 前必须做
   # 百分号编码；否则 GitHub 直接返回 400 Bad Request
   local enc
-  enc="$(python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))' "$1")"
+  # 必须用 asset（文件名），不能用 $1（那是完整路径，GitHub 会把 / 洗成 .，
+  # 结果资产变成 dist.xxx.dmg，更新源里的地址直接 404 —— 实测踩过）
+  enc="$(python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))' "$asset")"
   code="$(curl -sS -o /tmp/gh_upload.json -w '%{http_code}' -X POST \
     -H "Authorization: token ${TOKEN}" \
     -H "Content-Type: ${mime}" \
