@@ -126,13 +126,22 @@ async def check_update(request: Request):
     if not feed:
         return {"ok": True, "current": local, "configured": False,
                 "message": "未配置更新源"}
-    try:
-        req = urllib.request.Request(feed, headers={"User-Agent": f"huimeng/{local}"})
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except Exception as exc:  # noqa: BLE001
+    # GitHub 在国内网络下偶发 SSL 中断，重试一次能显著降低误报
+    data = None
+    last: Exception | None = None
+    for attempt in range(2):
+        try:
+            req = urllib.request.Request(feed, headers={"User-Agent": f"huimeng/{local}"})
+            with urllib.request.urlopen(req, timeout=12) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            break
+        except Exception as exc:  # noqa: BLE001
+            last = exc
+            if attempt == 0:
+                time.sleep(1.0)
+    if data is None:
         return {"ok": False, "current": local, "configured": True,
-                "message": f"检查更新失败：{type(exc).__name__}（{str(exc)[:80]}）"}
+                "message": f"检查更新失败：{type(last).__name__}（{str(last)[:70]}）"}
 
     latest = str(data.get("version") or "").strip()
     available = bool(latest) and _cmp_versions(latest, local) > 0

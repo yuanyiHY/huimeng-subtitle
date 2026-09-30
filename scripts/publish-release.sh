@@ -22,7 +22,9 @@ cd "$(dirname "$0")/.."
 VERSION="$(tr -d '[:space:]' < VERSION)"
 TAG="v${VERSION}"
 DMG="dist/绘梦subtitle-v${VERSION}.dmg"
-NAME="$(basename "$DMG")"
+# GitHub 会把资产名里的非 ASCII 字符（中文）洗掉，导致 latest.json 里的
+# 下载地址与实际资产名对不上而 404 —— 所以统一用一个可预测的 ASCII 名
+NAME="huimeng-subtitle-v${VERSION}.dmg"
 API="${GITHUB_API_BASE:-https://api.github.com}/repos/${REPO}"
 UPLOAD="${GITHUB_UPLOAD_BASE:-https://uploads.github.com}/repos/${REPO}"
 
@@ -88,14 +90,13 @@ echo "  release id = $RELEASE_ID"
 
 # ---------------------------------------------------------------- 4. 上传资产
 upload() {
-  local file="$1" mime="$2"
-  say "上传 $(basename "$file")（$(du -h "$file" | awk '{print $1}')）"
+  local file="$1" mime="$2" asset="${3:-$(basename "$1")}"
+  say "上传 ${asset}（$(du -h "$file" | awk '{print $1}')）"
   local code
   # 资产名可能是中文（如 绘梦subtitle-v3.3.1.dmg），放进 query string 前必须做
   # 百分号编码；否则 GitHub 直接返回 400 Bad Request
-  local name enc
-  name="$(basename "$file")"
-  enc="$(python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))' "$name")"
+  local enc
+  enc="$(python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))' "$1")"
   code="$(curl -sS -o /tmp/gh_upload.json -w '%{http_code}' -X POST \
     -H "Authorization: token ${TOKEN}" \
     -H "Content-Type: ${mime}" \
@@ -110,8 +111,8 @@ upload() {
   fi
 }
 
-upload "$DMG" "application/x-apple-diskimage"
-upload "dist/latest.json" "application/json"
+upload "$DMG" "application/x-apple-diskimage" "$NAME"
+upload "dist/latest.json" "application/json" "latest.json"
 
 say "完成"
 echo "  下载页   : https://github.com/${REPO}/releases/tag/${TAG}"
