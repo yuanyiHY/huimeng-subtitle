@@ -37,7 +37,7 @@
 
 ### 方式一：下载安装包（推荐给普通用户）
 
-1. 到 **Releases** 页下载最新的 `绘梦subtitle-vX.Y.Z.dmg`
+1. 到 [**Releases**](https://github.com/yuanyiHY/huimeng-subtitle/releases) 页下载最新的 `绘梦subtitle-vX.Y.Z.dmg`
 2. 打开 DMG，把「绘梦subtitle」拖进「应用程序」
 3. **首次打开需要手动放行**：在「应用程序」里按住 `Control` 点图标 → 选「打开」→ 再点一次「打开」
    （本应用没有 Apple 开发者证书，这是正常现象，之后双击即可）
@@ -45,7 +45,7 @@
 ### 方式二：从源码运行（开发者）
 
 ```bash
-git clone https://github.com/<你的用户名>/huimeng-subtitle.git
+git clone https://github.com/yuanyiHY/huimeng-subtitle.git
 cd huimeng-subtitle
 
 python3 -m venv .venv
@@ -97,7 +97,7 @@ cp .env.example .env      # 按下面「配置模型」填好 Key
 
 ```yaml
 update:
-  feed_url: "https://github.com/<用户名>/<仓库>/releases/latest/download/latest.json"
+  feed_url: "https://github.com/yuanyiHY/huimeng-subtitle/releases/latest/download/latest.json"
 ```
 
 JSON 格式：
