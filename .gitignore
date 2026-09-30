@@ -1,0 +1,43 @@
+# ===== 绝对不要提交：本地密钥与配置 =====
+.env
+.env.local
+*.key
+profiles.json
+
+# ===== Python =====
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# ===== 构建产物 =====
+dist/
+build/
+*.dmg
+*.app/
+*.icns.bak
+
+# ===== 模型权重（体积大，按需下载，不入库）=====
+models/
+*.safetensors
+*.ckpt
+*.onnx
+*.bin
+*.npz
+
+# ===== 开发过程中的临时物 =====
+_backup_v2/
+*.bak
+*.bak2
+*.backup
+*.tmp
+*.log
+
+# ===== 系统与编辑器 =====
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

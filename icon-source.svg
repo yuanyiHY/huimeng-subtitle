@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F172A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E293B;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#38BDF8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0EA5E9;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- 背景圆角矩形 -->
+  <rect width="512" height="512" rx="115" ry="115" fill="url(#bgGrad)"/>
+  
+  <!-- 地球主体 -->
+  <circle cx="256" cy="256" r="140" fill="none" stroke="url(#accentGrad)" stroke-width="8" opacity="0.3"/>
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#F8FAFC" stroke-width="6" opacity="0.9"/>
+  
+  <!-- 地球经纬线 -->
+  <ellipse cx="256" cy="256" rx="100" ry="40" fill="none" stroke="#F8FAFC" stroke-width="2" opacity="0.5"/>
+  <ellipse cx="256" cy="256" rx="40" ry="100" fill="none" stroke="#F8FAFC" stroke-width="2" opacity="0.5"/>
+  <line x1="256" y1="156" x2="256" y2="356" stroke="#F8FAFC" stroke-width="2" opacity="0.4"/>
+  
+  <!-- 流动箭头 -->
+  <path d="M 180 180 Q 220 140 280 160" fill="none" stroke="#38BDF8" stroke-width="8" stroke-linecap="round" opacity="0.8" filter="url(#glow)">
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <polygon points="280,160 295,155 285,170" fill="#38BDF8" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+  </polygon>
+  
+  <path d="M 332 220 Q 370 250 340 300" fill="none" stroke="#F97316" stroke-width="8" stroke-linecap="round" opacity="0.7" filter="url(#glow)">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2.5s" repeatCount="indefinite"/>
+  </path>
+  <polygon points="340,300 330,310 345,310" fill="#F97316" opacity="0.7">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2.5s" repeatCount="indefinite"/>
+  </polygon>
+  
+  <path d="M 220 332 Q 180 300 200 240" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" opacity="0.6" filter="url(#glow)">
+    <animate attributeName="opacity" values="0.6;0.9;0.6" dur="3s" repeatCount="indefinite"/>
+  </path>
+  <polygon points="200,240 190,230 205,235" fill="#38BDF8" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;0.9;0.6" dur="3s" repeatCount="indefinite"/>
+  </polygon>
+</svg>

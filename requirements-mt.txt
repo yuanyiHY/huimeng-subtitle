@@ -1,0 +1,20 @@
+# ==============================================================================
+# 绘梦subtitle - 本地翻译（NLLB / CTranslate2）
+# ==============================================================================
+#
+# 安装前提：
+#   - 已安装 requirements.txt 的核心依赖
+#
+# 安装：pip install -r requirements-mt.txt
+#
+# ==============================================================================
+
+# ---- Transformers & NLLB ----
+transformers>=4.40.0
+torch>=2.0.0
+
+# ---- Model Management ----
+huggingface_hub>=0.20.0
+
+# ---- Optional: Accelerated Inference ----
+# ctranslate2>=4.0  # Alternative to transformers, faster but requires separate model conversion

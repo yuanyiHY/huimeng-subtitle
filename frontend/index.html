@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>绘梦subtitle</title>
+<link rel="stylesheet" href="/static/style.css?v=3.3.0" />
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19z"/><path d="M9.5 20.5v-6h5v6"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7.5A2 2 0 0 1 5 5.5h3.6a2 2 0 0 1 1.5.7l1 1.3H19a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4.5h9.5a2.5 2.5 0 0 1 2.5 2.5v13H7.5A2.5 2.5 0 0 1 5 17.5z"/><path d="M5 17.5A2.5 2.5 0 0 1 7.5 15H17"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M16 5.2a3.2 3.2 0 0 1 0 6M17 14.8c2.4.4 4 2.3 4 4.7"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3.5v2M12 18.5v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M3.5 12h2M18.5 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m15.5 15.5 4 4"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9.5 6 6 6-6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5 18 12 8 18.5z"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4.5M7.5 9 12 4.5 16.5 9"/><path d="M4.5 15v3A1.5 1.5 0 0 0 6 19.5h12a1.5 1.5 0 0 0 1.5-1.5v-3"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3.5 13.8 9l5.7 1.8-5.7 1.8L12 18.2l-1.8-5.6L4.5 10.8 10.2 9z"/><path d="M18.5 16.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 7h15M9.5 7V4.8h5V7M7 7l.9 12.2A1.6 1.6 0 0 0 9.5 20.7h5a1.6 1.6 0 0 0 1.6-1.5L17 7"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4.5V16M7.5 11.5 12 16l4.5-4.5"/><path d="M5 19.5h14"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4.5 19.5h4L19 9a1.8 1.8 0 0 0 0-2.5l-1.5-1.5A1.8 1.8 0 0 0 15 5L4.5 15.5z"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="18" cy="12" r="1.4"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6.5 6.5 11 11M17.5 6.5l-11 11"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5.5v13M5.5 12h13"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4.5 9h13M14 5.5 17.5 9 14 12.5M19.5 15h-13M10 11.5 6.5 15 10 18.5"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24"><path d="M4 12h1.5M8 7.5v9M12 5v14M16 8.5v7M20 11.5h-1"/></symbol>
+  <symbol id="i-translate" viewBox="0 0 24 24"><path d="M4 6h8M8 4.5V6c0 4-1.8 7-4 8.5M6.5 10.5c1 2 3 3.6 5.5 4.5"/><path d="m13 19.5 3.5-8 3.5 8M14.4 16.6h4.2"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 7h12M8 12h12M8 17h12M4.5 7h.01M4.5 12h.01M4.5 17h.01"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="12" r="3.5"/><path d="M11.5 12H20M17 12v3M14.5 12v2"/></symbol>
+</svg>
+
+<div class="app">
+  <aside class="rail" id="rail">
+    <button class="rail-brand" id="railBrand" title="绘梦subtitle">
+      <span class="logo"><span></span><span></span><span></span></span>
+      <span class="rail-brand-copy"><b>绘梦subtitle</b><small>AI LANGUAGE WORKSPACE</small></span>
+    </button>
+
+    <nav class="rail-nav">
+      <button class="rail-item" data-page="home" data-tip="首页"><svg><use href="#i-home"/></svg><span>首页</span></button>
+      <button class="rail-item" data-page="live" data-tip="实时翻译"><svg><use href="#i-mic"/></svg><span>实时翻译</span></button>
+      <button class="rail-item" data-page="transcribe" data-tip="文件转写"><svg><use href="#i-file"/></svg><span>文件转写</span></button>
+      <div class="rail-group"><span>文件</span></div>
+      <button class="rail-item sub" data-page="default" data-tip="默认"><svg><use href="#i-folder"/></svg><span>默认</span></button>
+      <button class="rail-item sub" data-page="notes" data-tip="随堂笔记"><svg><use href="#i-book"/></svg><span>随堂笔记</span></button>
+      <button class="rail-item sub" data-page="meetings" data-tip="会议整理"><svg><use href="#i-users"/></svg><span>会议整理</span></button>
+    </nav>
+
+    <div class="rail-foot">
+      <div class="rail-status"><i></i><span id="railStatus">连接中</span></div>
+      <button class="rail-item" data-page="settings" data-tip="设置"><svg><use href="#i-settings"/></svg><span>设置</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- ================= 首页 ================= -->
+    <section class="page" id="page-home">
+      <header class="page-head">
+        <div class="page-head-main">
+          <div class="crumbs"><span>工作台</span></div>
+          <h1><span class="greet">☀️</span><span id="homeGreeting">下午好，欢迎回来</span></h1>
+          <div class="page-meta">
+            <span><svg><use href="#i-calendar"/></svg><span id="homeDate">—</span></span>
+            <span><svg><use href="#i-list"/></svg><span id="homeTaskCount">共 0 条记录</span></span>
+            <span class="chip soft" id="homeServiceChip">正在检查服务</span>
+          </div>
+        </div>
+        <div class="page-head-actions">
+          <button class="btn line" id="homeRefreshButton"><svg><use href="#i-wave"/></svg>刷新状态</button>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <section class="card block">
+          <div class="block-head"><h2>功能区</h2><p>高效记录，智能整理，让学习与工作更轻松</p></div>
+          <div class="feature-row">
+            <button class="feature" data-page="live" data-tone="blue">
+              <span class="feature-icon"><svg><use href="#i-mic"/></svg></span>
+              <span class="feature-copy"><b>实时字幕</b><small>实时语音转文字</small></span>
+              <svg class="feature-arrow"><use href="#i-arrow"/></svg>
+            </button>
+            <button class="feature" data-page="transcribe" data-tone="violet">
+              <span class="feature-icon"><svg><use href="#i-file"/></svg></span>
+              <span class="feature-copy"><b>文件转写</b><small>上传音视频，快速转写</small></span>
+              <svg class="feature-arrow"><use href="#i-arrow"/></svg>
+            </button>
+            <button class="feature" data-page="notes" data-tone="green">
+              <span class="feature-icon"><svg><use href="#i-book"/></svg></span>
+              <span class="feature-copy"><b>随堂笔记</b><small>AI 整理重点，生成笔记</small></span>
+              <svg class="feature-arrow"><use href="#i-arrow"/></svg>
+            </button>
+            <button class="feature" data-page="meetings" data-tone="orange">
+              <span class="feature-icon"><svg><use href="#i-users"/></svg></span>
+              <span class="feature-copy"><b>会议整理</b><small>智能提炼会议内容</small></span>
+              <svg class="feature-arrow"><use href="#i-arrow"/></svg>
+            </button>
+          </div>
+        </section>
+
+        <section class="card block">
+          <div class="block-head"><h2>文件处理区</h2><p>上传文件，快速转写与整理</p></div>
+          <div class="file-tools">
+            <button class="btn line" id="homeChooseFile"><svg><use href="#i-folder"/></svg>选择文件<svg class="caret"><use href="#i-chevron"/></svg></button>
+            <input type="file" id="homeFileInput" hidden accept="audio/*,video/*,.mp3,.m4a,.wav,.mp4,.mov,.aac,.txt,.md,.pdf,.doc,.docx" />
+          </div>
+          <div class="divider"></div>
+          <div class="sub-head">
+            <h3>最近文件</h3>
+            <div class="sub-head-tools">
+              <select class="mini-select" id="homeGroupFilter">
+                <option value="all">全部分组</option>
+                <option value="default">默认</option>
+                <option value="notes">随堂笔记</option>
+                <option value="meetings">会议整理</option>
+              </select>
+            </div>
+          </div>
+          <div class="recent-list" id="recentList"></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ================= 实时翻译 ================= -->
+    <section class="page" id="page-live">
+      <header class="page-head">
+        <div class="page-head-main">
+          <div class="crumbs"><span>实时翻译</span><i>›</i><span id="liveCrumbTime">未开始</span></div>
+          <h1 id="liveTitle">实时翻译</h1>
+          <div class="page-meta">
+            <span><svg><use href="#i-calendar"/></svg><span id="liveDate">—</span></span>
+            <span><svg><use href="#i-clock"/></svg><span>已录制 <b class="mono" id="liveTimer">00:00:00</b></span></span>
+            <span class="chip" id="liveStateChip">待开始</span>
+          </div>
+        </div>
+        <div class="page-head-actions">
+          <div class="inline-field">
+            <span class="inline-label">选择麦克风</span>
+            <div class="select-box"><select id="liveMicrophone"><option value="default">系统默认麦克风</option></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <section class="card mode-row">
+          <div class="row-label">工作模式</div>
+          <div class="mode-grid">
+            <button class="mode-card active" data-mode="default">
+              <span class="radio"></span>
+              <span class="mode-icon"><svg><use href="#i-file"/></svg></span>
+              <span class="mode-copy"><b>默认</b><small>只翻译，不调用 AI 总结</small></span>
+            </button>
+            <button class="mode-card" data-mode="notes">
+              <span class="radio"></span>
+              <span class="mode-icon"><svg><use href="#i-book"/></svg></span>
+              <span class="mode-copy"><b>随堂模式</b><small>实时翻译 + 轻量总结，结束后整理到随堂笔记</small></span>
+            </button>
+            <button class="mode-card" data-mode="meetings">
+              <span class="radio"></span>
+              <span class="mode-icon"><svg><use href="#i-users"/></svg></span>
+              <span class="mode-copy"><b>会议模式</b><small>实时翻译 + 重点提取，结束后整理到会议整理</small></span>
+            </button>
+          </div>
+        </section>
+
+        <section class="card control-bar" id="controlBar">
+          <button class="round primary" id="liveMainButton" title="开始翻译"><svg><use href="#i-play"/></svg></button>
+          <span class="rec-dot"></span>
+          <span class="mono control-timer" id="controlTimer">00:00:00</span>
+          <canvas class="wave" id="waveCanvas" width="600" height="40"></canvas>
+          <div class="control-right">
+            <button class="round ghost" id="liveKeyboardButton" title="用键盘输入原文"><svg><use href="#i-pencil"/></svg></button>
+            <button class="btn line" id="livePauseButton" disabled><svg><use href="#i-play"/></svg><span>继续</span></button>
+            <button class="btn danger solid" id="liveStopButton" disabled><svg><use href="#i-stop"/></svg>结束录制</button>
+          </div>
+        </section>
+
+        <div class="live-grid">
+          <section class="card flex-card">
+            <div class="card-head">
+              <h2>转写</h2>
+              <div class="lang-pair">
+                <div class="field inline"><span class="field-label">说话人语言</span>
+                  <div class="select-box"><select id="liveSrcLang"></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+                </div>
+                <div class="field inline"><span class="field-label">翻译语言</span>
+                  <div class="select-box"><select id="liveTgtLang"></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+                </div>
+                <button class="round ghost small" id="swapLangButton" title="交换语言"><svg><use href="#i-swap"/></svg></button>
+              </div>
+            </div>
+            <div class="transcript-cols">
+              <div class="t-col">
+                <div class="t-col-head"><span>原文</span><small id="originalLangLabel">韩语</small></div>
+                <div class="t-col-body" id="originalTranscript"><div class="empty"><svg><use href="#i-wave"/></svg><b>原文会显示在这里</b><small>开始说话后，识别结果会按时间线出现。</small></div></div>
+              </div>
+              <div class="t-col">
+                <div class="t-col-head"><span>译文</span><small id="targetLangLabel">中文</small></div>
+                <div class="t-col-body" id="translatedTranscript"><div class="empty"><svg><use href="#i-translate"/></svg><b>译文会显示在这里</b><small>翻译结果会和原文一一对应。</small></div></div>
+              </div>
+            </div>
+            <div class="card-foot">
+              <div class="foot-left">
+                <button class="btn text" id="liveCopyButton">复制</button>
+                <button class="btn text" id="liveClearButton">清空</button>
+                <button class="btn text" id="liveExportButton">导出</button>
+              </div>
+              <span class="foot-status" id="liveFootStatus">设备就绪 · 未开始录制</span>
+            </div>
+          </section>
+
+          <section class="card flex-card" id="aiPanel">
+            <div class="card-head">
+              <h2><svg class="spark"><use href="#i-sparkle"/></svg>AI 总结</h2>
+              <div class="card-head-tools">
+                <div class="seg" id="summarySourceSeg">
+                  <button data-src="target" class="active" title="译文为主：关键术语、人名、数字后面用括号附上原文">译文</button>
+                  <button data-src="source" title="完全用原文输出">原文</button>
+                  <button data-src="both" title="每条都写译文 + 原文两行，逐条对照">双语</button>
+                </div>
+                <span class="chip" id="aiStateChip">未启用</span>
+              </div>
+            </div>
+            <div class="ai-body" id="aiSummaryBody">
+              <div class="empty">
+                <svg><use href="#i-sparkle"/></svg>
+                <b id="aiEmptyTitle">当前为默认模式，不调用 AI 总结</b>
+                <small id="aiEmptyHint">如需使用 AI 总结，请切换到随堂模式或会议模式</small>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 文件转写 ================= -->
+    <section class="page" id="page-transcribe">
+      <header class="page-head">
+        <div class="page-head-main">
+          <div class="crumbs"><span>文件转写</span><i>›</i><span id="transcribeCrumbTime">—</span></div>
+          <h1>文件转写</h1>
+          <div class="page-meta">
+            <span><svg><use href="#i-calendar"/></svg><span id="transcribeDate">—</span></span>
+            <span><svg><use href="#i-list"/></svg><span id="transcribeTaskCount">共 0 个任务</span></span>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="transcribe-grid">
+          <div class="transcribe-main">
+            <section class="card dropzone" id="dropzone">
+              <span class="drop-icon"><svg><use href="#i-upload"/></svg></span>
+              <h2>拖拽文件到这里，或</h2>
+              <button class="btn primary" id="chooseFileButton"><svg><use href="#i-folder"/></svg>选择文件</button>
+              <input type="file" id="fileInput" hidden accept="audio/*,video/*,.mp3,.m4a,.wav,.mp4,.mov,.aac,.txt,.md,.pdf,.doc,.docx" />
+              <p class="drop-hint">支持音频、视频、文档格式（MP3、WAV、MP4、MOV、M4A、AAC、PDF、DOC、DOCX 等）</p>
+            </section>
+
+            <section class="card block">
+              <div class="block-head row">
+                <h2>转写任务</h2>
+                <select class="mini-select" id="taskFilter">
+                  <option value="all">全部状态</option>
+                  <option value="waiting">等待转写</option>
+                  <option value="running">转写中</option>
+                  <option value="done">转写完成</option>
+                  <option value="failed">失败</option>
+                </select>
+              </div>
+              <div class="task-table">
+                <div class="task-row head">
+                  <span>文件名</span><span>文件类型</span><span>大小</span><span>提交时间</span><span>状态</span><span>操作</span>
+                </div>
+                <div class="task-list" id="taskList"></div>
+              </div>
+            </section>
+          </div>
+
+          <aside class="transcribe-side">
+            <section class="card setting-panel">
+              <div class="panel-head"><svg class="spark"><use href="#i-settings"/></svg><h2>转写设置</h2></div>
+              <div class="field"><label>转写语言</label>
+                <div class="select-box"><select id="fileLang"></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+              </div>
+              <div class="field"><label>输出语言</label>
+                <div class="select-box"><select id="fileOutputLang"></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+              </div>
+              <div class="field">
+                <label>分组到</label>
+                <div class="dropdown" id="groupDropdown">
+                  <button class="dropdown-toggle" id="groupDropdownToggle">
+                    <svg class="lead"><use href="#i-folder"/></svg>
+                    <span id="groupDropdownLabel">默认</span>
+                    <svg class="caret"><use href="#i-chevron"/></svg>
+                  </button>
+                  <div class="dropdown-menu" id="groupDropdownMenu">
+                    <button class="dropdown-option" data-group="meetings"><span class="opt-top"><svg><use href="#i-users"/></svg><b>会议整理</b><svg class="tick"><use href="#i-check"/></svg></span><small>转写后调用深度思考模型：会议摘要、关键决策、待办事项、参与人任务</small></button>
+                    <button class="dropdown-option" data-group="notes"><span class="opt-top"><svg><use href="#i-book"/></svg><b>随堂笔记</b><svg class="tick"><use href="#i-check"/></svg></span><small>转写后调用深度思考模型：课程重点、知识结构、关键词、待办事项</small></button>
+                    <button class="dropdown-option active" data-group="default"><span class="opt-top"><svg><use href="#i-folder"/></svg><b>默认</b><svg class="tick"><use href="#i-check"/></svg></span><small>只转写 / 翻译，不调用深度思考模型，直接保存时间线、原文和译文</small></button>
+                  </div>
+                </div>
+                <small class="field-help" id="groupHelp">只转写 / 翻译，不调用深度思考模型。</small>
+              </div>
+              <div class="field">
+                <label>整理输出</label>
+                <div class="select-box"><select id="fileOutputMode">
+                  <option value="target">译文为主（关键处附原文）</option>
+                  <option value="source">原文</option>
+                  <option value="both">双语对照</option>
+                </select><svg class="caret"><use href="#i-chevron"/></svg></div>
+                <small class="field-help">仅在「分组到」选择随堂笔记 / 会议整理时生效。</small>
+              </div>
+              <label class="toggle"><span><b>说话人识别</b><small>自动区分不同说话人，并标注说话人角色</small></span><input type="checkbox" id="speakerDiarization" /><i></i></label>
+              <label class="toggle"><span><b>时间轴</b><small>在结果中显示时间戳，便于快速定位</small></span><input type="checkbox" id="showTimeline" checked /><i></i></label>
+              <label class="toggle"><span><b>专业词汇优化</b><small>基于 AI 识别行业术语，提升转写准确率</small></span><input type="checkbox" id="vocabBoost" checked /><i></i></label>
+              <button class="more-toggle" id="moreSettingsToggle"><svg><use href="#i-settings"/></svg>更多设置<svg class="caret"><use href="#i-chevron"/></svg></button>
+              <div class="more-panel hidden" id="moreSettingsPanel">
+                <div class="field"><label>转写引擎</label>
+                  <div class="select-box"><select id="transcribeEngine">
+                    <option value="local">本地 Whisper（离线）</option>
+                    <option value="cloud">云端模型（更快）</option>
+                  </select><svg class="caret"><use href="#i-chevron"/></svg></div>
+                </div>
+                <div class="field"><label>分段长度</label>
+                  <div class="select-box"><select id="transcribeSegment">
+                    <option value="short">短句（更细）</option>
+                    <option value="normal" selected>标准</option>
+                    <option value="long">长段（更连贯）</option>
+                  </select><svg class="caret"><use href="#i-chevron"/></svg></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card tip-card">
+              <div class="tip-head"><svg class="spark"><use href="#i-sparkle"/></svg><b>AI 提示</b></div>
+              <p>上传文件后将自动开始转写，您可以在此设置转写参数。</p>
+              <p>转写完成后可在左侧任务列表中查看结果，并归档到所选分组。</p>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 默认仓库 ================= -->
+    <section class="page" id="page-default">
+      <header class="page-head">
+        <div class="page-head-main">
+          <div class="crumbs"><span>默认</span><i>›</i><span>原始记录</span></div>
+          <h1>默认分组</h1>
+          <div class="page-meta">
+            <span><svg><use href="#i-list"/></svg><span id="defaultCount">共 0 条记录</span></span>
+            <span class="chip soft">只保留时间线、原文和译文，不调用 AI 整理</span>
+          </div>
+        </div>
+        <div class="page-head-actions">
+          <button class="btn line" data-page="live"><svg><use href="#i-mic"/></svg>开始实时翻译</button>
+        </div>
+      </header>
+      <div class="page-body">
+        <div class="repo-grid two">
+          <aside class="card repo-index">
+            <div class="panel-head"><svg class="spark"><use href="#i-folder"/></svg><h2>文件索引</h2></div>
+            <div class="repo-tools">
+              <div class="search-box"><svg><use href="#i-search"/></svg><input id="defaultSearch" placeholder="搜索文件" /></div>
+              <div class="sort-row">
+                <div class="select-box"><select id="defaultSort"><option value="new">按时间排序</option><option value="old">旧到新</option></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+                <button class="icon-btn" id="defaultDirButton" title="切换排序方向"><svg><use href="#i-swap"/></svg></button>
+              </div>
+            </div>
+            <div class="repo-list" id="defaultList"></div>
+          </aside>
+          <article class="card repo-detail" id="defaultDetail">
+            <div class="empty big"><svg><use href="#i-folder"/></svg><b>选择一条记录</b><small>时间线、原文和译文会显示在这里。</small></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 随堂笔记仓库 ================= -->
+    <section class="page" id="page-notes">
+      <header class="page-head">
+        <div class="page-head-main">
+          <div class="crumbs"><span>随堂笔记</span><i>›</i><span>笔记仓库</span></div>
+          <h1>随堂笔记仓库</h1>
+          <div class="page-meta">
+            <span><svg><use href="#i-list"/></svg><span id="notesCount">共 0 份笔记</span></span>
+            <span class="chip soft">由深度思考模型在后台整理生成</span>
+          </div>
+        </div>
+        <div class="page-head-actions">
+          <button class="btn line" data-page="live"><svg><use href="#i-mic"/></svg>开始随堂模式</button>
+        </div>
+      </header>
+      <div class="page-body">
+        <div class="repo-grid three">
+          <aside class="card repo-index">
+            <div class="panel-head"><svg class="spark"><use href="#i-book"/></svg><h2>文件索引</h2></div>
+            <div class="repo-tools">
+              <div class="search-box"><svg><use href="#i-search"/></svg><input id="notesSearch" placeholder="搜索文件" /></div>
+              <div class="sort-row">
+                <div class="select-box"><select id="notesSort"><option value="new">按时间排序</option><option value="old">旧到新</option></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+                <button class="icon-btn" id="notesDirButton" title="切换排序方向"><svg><use href="#i-swap"/></svg></button>
+              </div>
+            </div>
+            <div class="repo-list" id="notesList"></div>
+          </aside>
+
+          <article class="card note-editor" id="notesEditor">
+            <div class="empty big"><svg><use href="#i-book"/></svg><b>还没有随堂笔记</b><small>用随堂模式完成一次翻译，整理结果会出现在这里。</small></div>
+          </article>
+
+          <aside class="card ai-side" id="notesAiSide">
+            <div class="card-head"><h2><svg class="spark"><use href="#i-sparkle"/></svg>AI 重点</h2><span class="chip soft">基于本次记录生成</span></div>
+            <div class="ai-side-body" id="notesAiBody">
+              <div class="empty"><svg><use href="#i-sparkle"/></svg><b>暂无要点</b><small>整理完成后这里会显示核心要点、关键词和待办事项。</small></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 会议整理仓库 ================= -->
+    <section class="page" id="page-meetings">
+      <header class="page-head">
+        <div class="page-head-main">
+          <div class="crumbs"><span>会议整理</span><i>›</i><span>整理结果</span></div>
+          <h1>会议整理</h1>
+          <div class="page-meta">
+            <span><svg><use href="#i-list"/></svg><span id="meetingsCount">共 0 场会议</span></span>
+            <span class="chip soft" id="meetingsStateChip">由深度思考模型在后台整理生成</span>
+          </div>
+        </div>
+        <div class="page-head-actions">
+          <button class="btn line" id="meetingsReanalyzeButton"><svg><use href="#i-swap"/></svg>重新整理</button>
+          <button class="btn line" data-page="live"><svg><use href="#i-mic"/></svg>开始会议模式</button>
+        </div>
+      </header>
+      <div class="page-body">
+        <div class="repo-grid two">
+          <aside class="card repo-index">
+            <div class="panel-head"><svg class="spark"><use href="#i-users"/></svg><h2>文件索引</h2></div>
+            <div class="repo-tools">
+              <div class="search-box"><svg><use href="#i-search"/></svg><input id="meetingsSearch" placeholder="搜索文件" /></div>
+              <div class="sort-row">
+                <div class="select-box"><select id="meetingsSort"><option value="new">按时间排序</option><option value="old">旧到新</option></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+                <button class="icon-btn" id="meetingsDirButton" title="切换排序方向"><svg><use href="#i-swap"/></svg></button>
+              </div>
+            </div>
+            <div class="repo-list" id="meetingsList"></div>
+          </aside>
+          <article class="card repo-detail" id="meetingsDetail">
+            <div class="empty big"><svg><use href="#i-users"/></svg><b>还没有会议整理</b><small>用会议模式完成一次翻译，整理结果会出现在这里。</small></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ================= 设置弹窗 ================= -->
+<div class="overlay hidden" id="settingsOverlay">
+  <div class="settings-modal">
+    <button class="modal-x" id="settingsCloseButton" title="关闭"><svg><use href="#i-close"/></svg></button>
+    <aside class="settings-nav">
+      <button class="settings-tab active" data-pane="language"><svg><use href="#i-translate"/></svg><span>语言设置</span></button>
+      <button class="settings-tab" data-pane="microphone"><svg><use href="#i-mic"/></svg><span>麦克风设置</span></button>
+      <button class="settings-tab" data-pane="models"><svg><use href="#i-settings"/></svg><span>模型设置</span></button>
+      <button class="settings-tab" data-pane="storage"><svg><use href="#i-folder"/></svg><span>文件存放位置</span></button>
+      <button class="settings-tab" data-pane="about"><svg><use href="#i-sparkle"/></svg><span>关于 / 更新</span></button>
+      <div class="settings-nav-foot"><svg><use href="#i-settings"/></svg><span>设置</span></div>
+    </aside>
+
+    <div class="settings-body">
+      <div class="settings-scroll">
+        <div class="set-pane active" id="pane-language">
+          <div class="set-head"><h2>语言设置</h2><p>选择界面语言与录音转写语言</p></div>
+          <div class="set-rows">
+            <div class="set-row"><span class="set-label">界面语言</span>
+              <div class="select-box wide"><select id="uiLanguage"><option value="zh-CN">🇨🇳 中文</option><option value="en-US">🇺🇸 English</option></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+            </div>
+            <div class="set-row"><span class="set-label">原文语言</span>
+              <div class="select-box wide"><select id="defaultSourceLang"></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+            </div>
+            <div class="set-row"><span class="set-label">目标语言</span>
+              <div class="select-box wide"><select id="defaultTargetLang"></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="set-pane" id="pane-microphone">
+          <div class="set-head"><h2>麦克风设置</h2><p>选择实时翻译使用的输入设备，并检查系统权限</p></div>
+          <div class="set-rows">
+            <div class="set-row"><span class="set-label">输入设备</span>
+              <div class="select-box wide"><select id="settingsMicrophone"><option value="default">系统默认麦克风</option></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+            </div>
+            <div class="set-row"><span class="set-label">采集音量</span>
+              <div class="meter"><span id="micMeterFill"></span></div>
+            </div>
+          </div>
+          <div class="perm-box" id="permissionBox">
+            <i></i>
+            <div><b id="permissionTitle">麦克风权限由系统管理</b><small id="permissionHint">第一次开始翻译时，如果系统弹窗出现，请点击允许。</small></div>
+            <button class="btn line" id="checkPermissionButton">重新检查</button>
+          </div>
+          <div class="set-rows">
+            <div class="set-row"><span class="set-label">实时同传模式</span>
+              <label class="toggle bare"><input type="checkbox" id="realtimeModeToggle" /><i></i></label>
+            </div>
+          </div>
+          <p class="set-note">实时同传模式把麦克风音频直接发送到云端翻译模型，延迟更低；关闭时使用本地 Whisper 转写后再翻译，可离线运行。</p>
+        </div>
+
+        <div class="set-pane" id="pane-models">
+          <div class="set-head"><h2>模型设置</h2><p>为不同任务配置专用 AI 模型，三个模型各司其职</p></div>
+          <div id="modelPanels"></div>
+          <div class="model-flow">
+            <svg><use href="#i-sparkle"/></svg>
+            <span>模型调用流程：实时翻译 → 专用翻译模型 + 轻量实时模型；结束后整理 → 深度思考模型后台处理。</span>
+          </div>
+        </div>
+
+        <div class="set-pane" id="pane-storage">
+          <div class="set-head"><h2>文件存放位置</h2><p>设置软件数据根目录，软件会在其中管理三个分组的文件与索引</p></div>
+          <div class="set-rows">
+            <div class="set-row"><span class="set-label">数据根目录</span>
+              <div class="path-input"><input id="storageRoot" placeholder="例如 ~/Documents/绘梦subtitle" /><button class="btn line" id="chooseStorageButton">选择文件夹</button></div>
+            </div>
+            <div class="set-row"><span class="set-label">录音文件位置</span>
+              <div class="path-input"><input id="recordingsRoot" placeholder="例如 ~/Documents/intrealtimetranslate-recordings" /><button class="btn line" id="chooseRecordingsButton">选择文件夹</button></div>
+            </div>
+          </div>
+          <div class="folder-map">
+            <div><span class="tag">默认</span><code id="defaultFolderPath">—</code></div>
+            <div><span class="tag">随堂笔记</span><code id="notesFolderPath">—</code></div>
+            <div><span class="tag">会议整理</span><code id="meetingsFolderPath">—</code></div>
+          </div>
+          <button class="btn text" id="restoreStorageButton">恢复默认位置</button>
+          <div class="warn-note">修改位置不会删除旧数据：已有记录和录音仍留在原目录，需要时手动搬过去。三个分组目录会在数据根目录下自动创建。</div>
+        </div>
+      </div>
+
+        <div class="set-pane" id="pane-about">
+          <div class="set-head"><h2>关于 / 更新</h2><p>查看版本、检查更新，下载完成后可一键重启安装</p></div>
+
+          <div class="about-card">
+            <span class="about-logo"><svg><use href="#i-sparkle"/></svg></span>
+            <div class="about-main">
+              <b>绘梦subtitle</b>
+              <small>当前版本 <span id="aboutVersion">—</span><span id="aboutFeedHint"></span></small>
+            </div>
+            <button class="btn line" id="checkUpdateButton"><svg><use href="#i-swap"/></svg>检查更新</button>
+          </div>
+
+          <div class="update-box" id="updateBox"></div>
+        </div>
+
+      <div class="settings-foot">
+        <span class="foot-msg" id="settingsFootMsg"></span>
+        <span class="app-version" id="appVersion">绘梦subtitle</span>
+        <button class="btn line" id="settingsCancelButton">取消</button>
+        <button class="btn line" id="testModelsButton"><svg><use href="#i-key"/></svg>测试全部连接</button>
+        <button class="btn primary" id="settingsSaveButton">保存设置</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 停止确认 ================= -->
+<div class="overlay center hidden" id="stopModal">
+  <div class="modal">
+    <h2>停止录音</h2>
+    <p>停止后当前录音将结束，确认要停止录音吗？</p>
+    <div class="modal-actions">
+      <button class="btn line" id="cancelStopButton">取消</button>
+      <button class="btn danger solid" id="confirmStopButton">停止录音</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 保存录音 ================= -->
+<div class="overlay center hidden" id="saveModal">
+  <div class="modal wide">
+    <button class="modal-x" id="closeSaveModal"><svg><use href="#i-close"/></svg></button>
+    <h2>保存录音</h2>
+    <div class="record-info">
+      <span class="record-icon"><svg><use href="#i-wave"/></svg></span>
+      <div><b>录音已完成</b><small id="saveRecordMeta">时长 00:00:00 · 刚刚</small></div>
+    </div>
+    <div class="field">
+      <label>录音标题</label>
+      <div class="input-count"><input id="saveTitle" maxlength="20" placeholder="例如：产品例会 / 周一课程" /><span id="saveTitleCount">0/20</span></div>
+    </div>
+    <div class="field">
+      <label>文件描述（非必选）</label>
+      <textarea id="saveDescription" rows="4" placeholder="请输入文件描述…"></textarea>
+    </div>
+    <div class="field">
+      <label>翻译语言</label>
+      <div class="select-box wide"><select id="saveTargetLang"></select><svg class="caret"><use href="#i-chevron"/></svg></div>
+    </div>
+    <div class="field">
+      <label>整理输出</label>
+      <div class="seg wide" id="saveOutputSeg">
+        <button data-mode="target" class="active" title="译文为主，关键术语 / 人名 / 数字后括号附原文">译文为主<small>关键处附原文</small></button>
+        <button data-mode="source" title="完全用原文输出">原文<small>原样保留</small></button>
+        <button data-mode="both" title="每条都写译文 + 原文两行">双语对照<small>逐条对照</small></button>
+      </div>
+      <small class="field-help" id="saveOutputHelp">整理结果用译文输出，关键术语与决策处附上原文词段，便于查证。</small>
+    </div>
+    <div class="save-foot">
+      <span class="save-hint" id="saveModalHint"><svg><use href="#i-sparkle"/></svg>即将开始 AI 分析</span>
+      <div class="modal-actions">
+        <button class="btn line" id="cancelSaveButton">取消</button>
+        <button class="btn primary" id="confirmSaveButton">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 记录详情弹窗 ================= -->
+<div class="overlay center hidden" id="detailModal">
+  <div class="modal wide">
+    <button class="modal-x" id="closeDetailModal"><svg><use href="#i-close"/></svg></button>
+    <h2 id="detailModalTitle">记录详情</h2>
+    <div class="detail-modal-body" id="detailModalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="/static/app.js?v=3.3.0"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# ==============================================================================
+# 绘梦subtitle - 本地 LLM（MLX Qwen）
+# ==============================================================================
+#
+# 安装前提：
+#   - macOS with Apple Silicon (M1/M2/M3)
+#   - 已安装 requirements.txt 和 requirements-mt.txt
+#
+# 安装：pip install -r requirements-llm.txt
+#
+# 注意：当前 MLXLLMEngine.translate() 尚未实现，仅用于未来扩展
+#
+# ==============================================================================
+
+# ---- Apple MLX LLM ----
+mlx-lm>=0.18.0
+
+# ---- Model Management ----
+huggingface_hub>=0.20.0

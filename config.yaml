@@ -1,0 +1,46 @@
+# 绘梦subtitle configuration.
+# Pure-local mode: leave all cloud keys empty; everything defaults sensibly.
+
+server:
+  host: 127.0.0.1
+  port: 8000
+
+asr:
+  engine: local # local (implemented) | api (reserved)
+  local:
+    backend: mlx
+    # 无 GPU 机器建议用 small 加快；真机 M5 换回 large-v3-turbo 保质量
+    model: mlx-community/whisper-small-mlx
+    language: zh
+    max_seconds: 12
+
+mt:
+  engine: auto # auto | local-nllb | local-qwen | cloud
+  cloud:
+    base_url: ${MT_BASE_URL}
+    api_key: ${MT_API_KEY}
+    model: "" # leave empty to follow the main model
+    timeout: 15
+  local:
+    model: facebook/nllb-200-distilled-600M
+    int8: true
+  local_qwen:
+    model: Qwen2.5-7B-Instruct-4bit-MLX
+
+orchestrator:
+  base_url: ${MAIN_BASE_URL}
+  api_key: ${MAIN_API_KEY}
+  model: "" # e.g. deepseek-chat
+  check_mt_on_start: true
+  summary_prompt: "你是一名专业课程助教，请整理以下课程…"
+  outline_prompt: "生成章节提纲…"
+  questions_prompt: "根据课程内容出 5 道复习题…"
+
+models_dir: ~/Library/Application Support/intrealtimetranslate/models
+recordings_dir: ~/Documents/intrealtimetranslate-recordings
+
+# 应用更新检查（可选）
+# feed_url 指向一个 JSON：{"version":"1.2.1","download_url":"https://…","notes":"…"}
+# 留空则不检查；配置后可兼容托管在任意静态服务器上的更新清单。
+update:
+  feed_url: ""

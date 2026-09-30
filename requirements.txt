@@ -1,0 +1,40 @@
+# ==============================================================================
+# 绘梦subtitle (IntRealTimeTranslate) Requirements
+# ==============================================================================
+# 
+# 安装说明：
+#   1. 基础安装（必需）：pip install -r requirements.txt
+#   2. 本地ASR（可选）：pip install -r requirements-asr.txt
+#   3. 本地翻译（可选）：pip install -r requirements-mt.txt
+#   4. 本地LLM（可选）：pip install -r requirements-llm.txt
+#
+# 系统依赖：
+#   - macOS with Apple Silicon (for MLX acceleration)
+#   - ffmpeg: brew install ffmpeg
+#
+# ==============================================================================
+
+# ---- Core Web Framework ----
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+
+# ---- Desktop UI ----
+pywebview>=5.0
+
+# ---- Configuration & Serialization ----
+pydantic>=2.5.0
+PyYAML>=6.0
+python-dotenv>=1.0.0
+
+# ---- Security ----
+cryptography>=42.0
+
+# ---- Audio Processing (REQUIRED for real-time streaming) ----
+# These are HARD dependencies for backend/api/stream.py and backend/utils/audio.py
+numpy>=1.24.0
+soundfile>=0.12.0
+scipy>=1.10.0
+
+# ---- HTTP Client (for cloud API calls) ----
+httpx>=0.27.0
